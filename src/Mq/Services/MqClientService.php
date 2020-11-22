@@ -22,12 +22,8 @@ class MqClientService
     }
 
     /**
-     * @param array|Pub $data {
-     *     Optional. Data for populating the Message object.
-     *
      * @param string $data
      * @param string $queue
-     * }
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
@@ -64,20 +60,16 @@ class MqClientService
         throw new \Exception("Mq rpc client error: " . $response->details, $response->code);
     }
     /**
-     * @param array|DelayPublishRequest $data {
-     *     Optional. Data for populating the Message object.
-     *
      * @param string $data
      * @param string $queue
      * @param int|string $seconds
-     * }
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function delayPublish($data = '', $queue = '', $seconds = '', $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($data = '', $queue = '', $seconds = 0, $asArray = true, $metadata = [], $options = [])
     {
         $input = ["data" => $data, "queue" => $queue, "seconds" => $seconds];
         $request = $input;
@@ -107,11 +99,7 @@ class MqClientService
         throw new \Exception("Mq rpc client error: " . $response->details, $response->code);
     }
     /**
-     * @param array|Sub $data {
-     *     Optional. Data for populating the Message object.
-     *
      * @param string $queue
-     * }
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
@@ -148,18 +136,14 @@ class MqClientService
         throw new \Exception("Mq rpc client error: " . $response->details, $response->code);
     }
     /**
-     * @param array|QueueId $data {
-     *     Optional. Data for populating the Message object.
-     *
      * @param int|string $id
-     * }
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function ack($id = '', $asArray = true, $metadata = [], $options = [])
+    public function ack($id = 0, $asArray = true, $metadata = [], $options = [])
     {
         $input = ["id" => $id];
         $request = $input;
