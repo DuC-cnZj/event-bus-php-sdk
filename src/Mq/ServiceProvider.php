@@ -12,7 +12,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->singleton(MqClient::class);
         $this->app->when(MqClient::class)
             ->needs('$hostname')
-            ->give(env("DUCCNZJ_HOST", ""));
+            ->give(env("MQ_HOST", ""));
         $this->app->when(MqClient::class)
             ->needs('$opts')
             ->give([
