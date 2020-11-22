@@ -25,8 +25,8 @@ class MqClientService
      * @param array|Pub $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $data
-     *     @type string $queue
+     * @param string $data
+     * @param string $queue
      * }
      * @param bool $asArray
      * @param array $metadata metadata
@@ -34,12 +34,13 @@ class MqClientService
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function publish($data = [], $asArray = true, $metadata = [], $options = [])
+    public function publish($data = '', $queue = '', $asArray = true, $metadata = [], $options = [])
     {
-        $request = $data;
-        if (is_array($data)) {
+        $input = ["data" => $data, "queue" => $queue];
+        $request = $input;
+        if (is_array($input)) {
             $request = new Pub();
-            foreach($data as $key => $value) {
+            foreach($input as $key => $value) {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
                 if (method_exists($request, $method)) {
                     $request->$method($value);
@@ -66,9 +67,9 @@ class MqClientService
      * @param array|DelayPublishRequest $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $data
-     *     @type string $queue
-     *     @type int|string $seconds
+     * @param string $data
+     * @param string $queue
+     * @param int|string $seconds
      * }
      * @param bool $asArray
      * @param array $metadata metadata
@@ -76,12 +77,13 @@ class MqClientService
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function delayPublish($data = [], $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($data = '', $queue = '', $seconds = '', $asArray = true, $metadata = [], $options = [])
     {
-        $request = $data;
-        if (is_array($data)) {
+        $input = ["data" => $data, "queue" => $queue, "seconds" => $seconds];
+        $request = $input;
+        if (is_array($input)) {
             $request = new DelayPublishRequest();
-            foreach($data as $key => $value) {
+            foreach($input as $key => $value) {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
                 if (method_exists($request, $method)) {
                     $request->$method($value);
@@ -108,7 +110,7 @@ class MqClientService
      * @param array|Sub $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $queue
+     * @param string $queue
      * }
      * @param bool $asArray
      * @param array $metadata metadata
@@ -116,12 +118,13 @@ class MqClientService
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function subscribe($data = [], $asArray = true, $metadata = [], $options = [])
+    public function subscribe($queue = '', $asArray = true, $metadata = [], $options = [])
     {
-        $request = $data;
-        if (is_array($data)) {
+        $input = ["queue" => $queue];
+        $request = $input;
+        if (is_array($input)) {
             $request = new Sub();
-            foreach($data as $key => $value) {
+            foreach($input as $key => $value) {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
                 if (method_exists($request, $method)) {
                     $request->$method($value);
@@ -148,7 +151,7 @@ class MqClientService
      * @param array|QueueId $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type int|string $id
+     * @param int|string $id
      * }
      * @param bool $asArray
      * @param array $metadata metadata
@@ -156,12 +159,13 @@ class MqClientService
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function ack($data = [], $asArray = true, $metadata = [], $options = [])
+    public function ack($id = '', $asArray = true, $metadata = [], $options = [])
     {
-        $request = $data;
-        if (is_array($data)) {
+        $input = ["id" => $id];
+        $request = $input;
+        if (is_array($input)) {
             $request = new QueueId();
-            foreach($data as $key => $value) {
+            foreach($input as $key => $value) {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
                 if (method_exists($request, $method)) {
                     $request->$method($value);

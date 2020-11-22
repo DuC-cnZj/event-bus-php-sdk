@@ -17,6 +17,7 @@ class MqClient extends \Grpc\BaseStub {
     }
 
     /**
+     * php:inline
      * @param \DucCnzj\EventBus\Mq\Pub $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -31,6 +32,7 @@ class MqClient extends \Grpc\BaseStub {
     }
 
     /**
+     * php:inline
      * @param \DucCnzj\EventBus\Mq\DelayPublishRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -45,6 +47,7 @@ class MqClient extends \Grpc\BaseStub {
     }
 
     /**
+     * php:inline
      * @param \DucCnzj\EventBus\Mq\Sub $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -59,6 +62,7 @@ class MqClient extends \Grpc\BaseStub {
     }
 
     /**
+     * php:inline
      * @param \DucCnzj\EventBus\Mq\QueueId $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
