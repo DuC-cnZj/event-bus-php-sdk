@@ -14,13 +14,13 @@ use Google\Protobuf\Internal\GPBUtil;
 class DelayPublishRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string data = 1;</code>
-     */
-    protected $data = '';
-    /**
-     * Generated from protobuf field <code>string queue = 2;</code>
+     * Generated from protobuf field <code>string queue = 1;</code>
      */
     protected $queue = '';
+    /**
+     * Generated from protobuf field <code>string data = 2;</code>
+     */
+    protected $data = '';
     /**
      * Generated from protobuf field <code>uint64 seconds = 3;</code>
      */
@@ -32,8 +32,8 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $data
      *     @type string $queue
+     *     @type string $data
      *     @type int|string $seconds
      * }
      */
@@ -43,29 +43,7 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string data = 1;</code>
-     * @return string
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Generated from protobuf field <code>string data = 1;</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setData($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->data = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>string queue = 2;</code>
+     * Generated from protobuf field <code>string queue = 1;</code>
      * @return string
      */
     public function getQueue()
@@ -74,7 +52,7 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string queue = 2;</code>
+     * Generated from protobuf field <code>string queue = 1;</code>
      * @param string $var
      * @return $this
      */
@@ -82,6 +60,28 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->queue = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string data = 2;</code>
+     * @return string
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Generated from protobuf field <code>string data = 2;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setData($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->data = $var;
 
         return $this;
     }

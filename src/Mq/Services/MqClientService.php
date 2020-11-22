@@ -22,17 +22,17 @@ class MqClientService
     }
 
     /**
-     * @param string $data
      * @param string $queue
+     * @param string $data
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function publish($data = '', $queue = '', $asArray = true, $metadata = [], $options = [])
+    public function publish($queue = '', $data = '', $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["data" => $data, "queue" => $queue];
+        $input = ["queue" => $queue, "data" => $data];
         $request = $input;
         if (is_array($input)) {
             $request = new Pub();
@@ -60,8 +60,8 @@ class MqClientService
         throw new \Exception("Mq rpc client error: " . $response->details, $response->code);
     }
     /**
-     * @param string $data
      * @param string $queue
+     * @param string $data
      * @param int|string $seconds
      * @param bool $asArray
      * @param array $metadata metadata
@@ -69,9 +69,9 @@ class MqClientService
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function delayPublish($data = '', $queue = '', $seconds = 0, $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($queue = '', $data = '', $seconds = 0, $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["data" => $data, "queue" => $queue, "seconds" => $seconds];
+        $input = ["queue" => $queue, "data" => $data, "seconds" => $seconds];
         $request = $input;
         if (is_array($input)) {
             $request = new DelayPublishRequest();
