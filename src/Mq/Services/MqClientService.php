@@ -136,14 +136,14 @@ class MqClientService
         throw new \Exception("Mq rpc client error: " . $response->details, $response->code);
     }
     /**
-     * @param int|string $id
+     * @param string $id
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \DucCnzj\EventBus\Mq\Response|array
      */
-    public function ack($id = 0, $asArray = true, $metadata = [], $options = [])
+    public function ack($id = '', $asArray = true, $metadata = [], $options = [])
     {
         $input = ["id" => $id];
         $request = $input;

@@ -14,9 +14,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class QueueId extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>uint64 id = 1;</code>
+     * Generated from protobuf field <code>string id = 1;</code>
      */
-    protected $id = 0;
+    protected $id = '';
 
     /**
      * Constructor.
@@ -24,7 +24,7 @@ class QueueId extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type int|string $id
+     *     @type string $id
      * }
      */
     public function __construct($data = NULL) {
@@ -33,8 +33,8 @@ class QueueId extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 id = 1;</code>
-     * @return int|string
+     * Generated from protobuf field <code>string id = 1;</code>
+     * @return string
      */
     public function getId()
     {
@@ -42,13 +42,13 @@ class QueueId extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 id = 1;</code>
-     * @param int|string $var
+     * Generated from protobuf field <code>string id = 1;</code>
+     * @param string $var
      * @return $this
      */
     public function setId($var)
     {
-        GPBUtil::checkUint64($var);
+        GPBUtil::checkString($var, True);
         $this->id = $var;
 
         return $this;
