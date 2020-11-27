@@ -9,14 +9,18 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>mq.Sub</code>
+ * Generated from protobuf message <code>mq.PublishRequest</code>
  */
-class Sub extends \Google\Protobuf\Internal\Message
+class PublishRequest extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>string queue = 1;</code>
      */
     protected $queue = '';
+    /**
+     * Generated from protobuf field <code>string data = 2;</code>
+     */
+    protected $data = '';
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class Sub extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $queue
+     *     @type string $data
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class Sub extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->queue = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string data = 2;</code>
+     * @return string
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Generated from protobuf field <code>string data = 2;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setData($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->data = $var;
 
         return $this;
     }

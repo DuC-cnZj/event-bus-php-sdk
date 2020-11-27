@@ -2,9 +2,9 @@
 
 namespace DucCnzj\EventBus\Mq\Services;
 
-use DucCnzj\EventBus\Mq\Pub;
+use DucCnzj\EventBus\Mq\PublishRequest;
 use DucCnzj\EventBus\Mq\DelayPublishRequest;
-use DucCnzj\EventBus\Mq\Sub;
+use DucCnzj\EventBus\Mq\SubscribeRequest;
 use DucCnzj\EventBus\Mq\QueueId;
 use DucCnzj\EventBus\Mq\MqClient;
 
@@ -35,7 +35,7 @@ class MqClientService
         $input = ["queue" => $queue, "data" => $data];
         $request = $input;
         if (is_array($input)) {
-            $request = new Pub();
+            $request = new PublishRequest();
             foreach($input as $key => $value) {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
                 if (method_exists($request, $method)) {
@@ -111,7 +111,7 @@ class MqClientService
         $input = ["queue" => $queue];
         $request = $input;
         if (is_array($input)) {
-            $request = new Sub();
+            $request = new SubscribeRequest();
             foreach($input as $key => $value) {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
                 if (method_exists($request, $method)) {
@@ -162,6 +162,43 @@ class MqClientService
         }
         $metadata["UID"] = [(string)auth()->id()];
         [$data, $response] = $this->client->ack($request, $metadata, $options)->wait();
+        if ($response->code == \Grpc\CALL_OK) {
+            if ($asArray) {
+                return json_decode($data->serializeToJsonString(), true);
+            }
+
+            return $data;
+        }
+
+        throw new \Exception("Mq rpc client error: " . $response->details, $response->code);
+    }
+    /**
+     * @param string $id
+     * @param bool $asArray
+     * @param array $metadata metadata
+     * @param array $options call options
+     *
+     * @return \DucCnzj\EventBus\Mq\Response|array
+     */
+    public function nack($id = '', $asArray = true, $metadata = [], $options = [])
+    {
+        $input = ["id" => $id];
+        $request = $input;
+        if (is_array($input)) {
+            $request = new QueueId();
+            foreach($input as $key => $value) {
+                $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
+                if (method_exists($request, $method)) {
+                    $request->$method($value);
+                }
+            }
+        }
+        // TODO 不写死
+        if (isset($_SERVER['UBER-TRACE-ID'])) {
+            $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
+        }
+        $metadata["UID"] = [(string)auth()->id()];
+        [$data, $response] = $this->client->nack($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
             if ($asArray) {
                 return json_decode($data->serializeToJsonString(), true);

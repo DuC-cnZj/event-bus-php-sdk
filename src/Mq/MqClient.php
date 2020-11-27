@@ -18,12 +18,12 @@ class MqClient extends \Grpc\BaseStub {
 
     /**
      * php:inline
-     * @param \DucCnzj\EventBus\Mq\Pub $argument input argument
+     * @param \DucCnzj\EventBus\Mq\PublishRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function publish(\DucCnzj\EventBus\Mq\Pub $argument,
+    public function publish(\DucCnzj\EventBus\Mq\PublishRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/publish',
         $argument,
@@ -48,12 +48,12 @@ class MqClient extends \Grpc\BaseStub {
 
     /**
      * php:inline
-     * @param \DucCnzj\EventBus\Mq\Sub $argument input argument
+     * @param \DucCnzj\EventBus\Mq\SubscribeRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function subscribe(\DucCnzj\EventBus\Mq\Sub $argument,
+    public function subscribe(\DucCnzj\EventBus\Mq\SubscribeRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/subscribe',
         $argument,
@@ -71,6 +71,21 @@ class MqClient extends \Grpc\BaseStub {
     public function ack(\DucCnzj\EventBus\Mq\QueueId $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/ack',
+        $argument,
+        ['\DucCnzj\EventBus\Mq\Response', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * php:inline
+     * @param \DucCnzj\EventBus\Mq\QueueId $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function nack(\DucCnzj\EventBus\Mq\QueueId $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/mq.Mq/nack',
         $argument,
         ['\DucCnzj\EventBus\Mq\Response', 'decode'],
         $metadata, $options);
