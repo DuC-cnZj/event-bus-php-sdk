@@ -16,9 +16,9 @@ class MqClientService
      */
     protected $client;
 
-    public function __construct()
+    public function __construct(MqClient $client)
     {
-        $this->client = app(MqClient::class);
+        $this->client = $client;
     }
 
     /**
