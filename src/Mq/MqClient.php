@@ -27,7 +27,7 @@ class MqClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/publish',
         $argument,
-        ['\DucCnzj\EventBus\Mq\Response', 'decode'],
+        ['\Google\Protobuf\GPBEmpty', 'decode'],
         $metadata, $options);
     }
 
@@ -42,7 +42,7 @@ class MqClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/delayPublish',
         $argument,
-        ['\DucCnzj\EventBus\Mq\Response', 'decode'],
+        ['\Google\Protobuf\GPBEmpty', 'decode'],
         $metadata, $options);
     }
 
@@ -57,7 +57,7 @@ class MqClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/subscribe',
         $argument,
-        ['\DucCnzj\EventBus\Mq\Response', 'decode'],
+        ['\DucCnzj\EventBus\Mq\SubscribeResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -72,7 +72,7 @@ class MqClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/ack',
         $argument,
-        ['\DucCnzj\EventBus\Mq\Response', 'decode'],
+        ['\Google\Protobuf\GPBEmpty', 'decode'],
         $metadata, $options);
     }
 
@@ -87,7 +87,7 @@ class MqClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/mq.Mq/nack',
         $argument,
-        ['\DucCnzj\EventBus\Mq\Response', 'decode'],
+        ['\Google\Protobuf\GPBEmpty', 'decode'],
         $metadata, $options);
     }
 

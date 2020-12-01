@@ -9,22 +9,22 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>mq.DelayPublishRequest</code>
+ * Generated from protobuf message <code>mq.SubscribeResponse</code>
  */
-class DelayPublishRequest extends \Google\Protobuf\Internal\Message
+class SubscribeResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string queue = 1;</code>
+     * Generated from protobuf field <code>string id = 1;</code>
      */
-    protected $queue = '';
+    protected $id = '';
     /**
      * Generated from protobuf field <code>string data = 2;</code>
      */
     protected $data = '';
     /**
-     * Generated from protobuf field <code>uint64 delaySeconds = 3;</code>
+     * Generated from protobuf field <code>string queue = 3;</code>
      */
-    protected $delaySeconds = 0;
+    protected $queue = '';
 
     /**
      * Constructor.
@@ -32,9 +32,9 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $queue
+     *     @type string $id
      *     @type string $data
-     *     @type int|string $delaySeconds
+     *     @type string $queue
      * }
      */
     public function __construct($data = NULL) {
@@ -43,23 +43,23 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string queue = 1;</code>
+     * Generated from protobuf field <code>string id = 1;</code>
      * @return string
      */
-    public function getQueue()
+    public function getId()
     {
-        return $this->queue;
+        return $this->id;
     }
 
     /**
-     * Generated from protobuf field <code>string queue = 1;</code>
+     * Generated from protobuf field <code>string id = 1;</code>
      * @param string $var
      * @return $this
      */
-    public function setQueue($var)
+    public function setId($var)
     {
         GPBUtil::checkString($var, True);
-        $this->queue = $var;
+        $this->id = $var;
 
         return $this;
     }
@@ -87,23 +87,23 @@ class DelayPublishRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 delaySeconds = 3;</code>
-     * @return int|string
+     * Generated from protobuf field <code>string queue = 3;</code>
+     * @return string
      */
-    public function getDelaySeconds()
+    public function getQueue()
     {
-        return $this->delaySeconds;
+        return $this->queue;
     }
 
     /**
-     * Generated from protobuf field <code>uint64 delaySeconds = 3;</code>
-     * @param int|string $var
+     * Generated from protobuf field <code>string queue = 3;</code>
+     * @param string $var
      * @return $this
      */
-    public function setDelaySeconds($var)
+    public function setQueue($var)
     {
-        GPBUtil::checkUint64($var);
-        $this->delaySeconds = $var;
+        GPBUtil::checkString($var, True);
+        $this->queue = $var;
 
         return $this;
     }

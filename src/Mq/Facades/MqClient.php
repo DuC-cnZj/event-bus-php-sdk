@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  *
- * @method static \DucCnzj\EventBus\Mq\Response|array publish($queue = '', $data = '', bool $asArray = true, $metadata = [], $options = [])
- * @method static \DucCnzj\EventBus\Mq\Response|array delayPublish($queue = '', $data = '', $seconds = 0, bool $asArray = true, $metadata = [], $options = [])
- * @method static \DucCnzj\EventBus\Mq\Response|array subscribe($queue = '', bool $asArray = true, $metadata = [], $options = [])
- * @method static \DucCnzj\EventBus\Mq\Response|array ack($id = '', bool $asArray = true, $metadata = [], $options = [])
- * @method static \DucCnzj\EventBus\Mq\Response|array nack($id = '', bool $asArray = true, $metadata = [], $options = [])
+ * @method static \Google\Protobuf\GPBEmpty|array publish($queue = '', $data = '', bool $asArray = true, $metadata = [], $options = [])
+ * @method static \Google\Protobuf\GPBEmpty|array delayPublish($queue = '', $data = '', $delaySeconds = 0, bool $asArray = true, $metadata = [], $options = [])
+ * @method static \DucCnzj\EventBus\Mq\SubscribeResponse|array subscribe($queue = '', bool $asArray = true, $metadata = [], $options = [])
+ * @method static \Google\Protobuf\GPBEmpty|array ack($id = '', bool $asArray = true, $metadata = [], $options = [])
+ * @method static \Google\Protobuf\GPBEmpty|array nack($id = '', bool $asArray = true, $metadata = [], $options = [])
  *
  * Class MqClient
  */

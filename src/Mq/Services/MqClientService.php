@@ -28,7 +28,7 @@ class MqClientService
      * @param array $metadata metadata
      * @param array $options call options
      *
-     * @return \DucCnzj\EventBus\Mq\Response|array
+     * @return \Google\Protobuf\GPBEmpty|array
      */
     public function publish($queue = '', $data = '', $asArray = true, $metadata = [], $options = [])
     {
@@ -62,16 +62,16 @@ class MqClientService
     /**
      * @param string $queue
      * @param string $data
-     * @param int|string $seconds
+     * @param int|string $delaySeconds
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
-     * @return \DucCnzj\EventBus\Mq\Response|array
+     * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function delayPublish($queue = '', $data = '', $seconds = 0, $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($queue = '', $data = '', $delaySeconds = 0, $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["queue" => $queue, "data" => $data, "seconds" => $seconds];
+        $input = ["queue" => $queue, "data" => $data, "delaySeconds" => $delaySeconds];
         $request = $input;
         if (is_array($input)) {
             $request = new DelayPublishRequest();
@@ -104,7 +104,7 @@ class MqClientService
      * @param array $metadata metadata
      * @param array $options call options
      *
-     * @return \DucCnzj\EventBus\Mq\Response|array
+     * @return \DucCnzj\EventBus\Mq\SubscribeResponse|array
      */
     public function subscribe($queue = '', $asArray = true, $metadata = [], $options = [])
     {
@@ -141,7 +141,7 @@ class MqClientService
      * @param array $metadata metadata
      * @param array $options call options
      *
-     * @return \DucCnzj\EventBus\Mq\Response|array
+     * @return \Google\Protobuf\GPBEmpty|array
      */
     public function ack($id = '', $asArray = true, $metadata = [], $options = [])
     {
@@ -178,7 +178,7 @@ class MqClientService
      * @param array $metadata metadata
      * @param array $options call options
      *
-     * @return \DucCnzj\EventBus\Mq\Response|array
+     * @return \Google\Protobuf\GPBEmpty|array
      */
     public function nack($id = '', $asArray = true, $metadata = [], $options = [])
     {
