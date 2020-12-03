@@ -17,6 +17,10 @@ class TopicSubscribeRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string topic = 1;</code>
      */
     protected $topic = '';
+    /**
+     * Generated from protobuf field <code>string queueName = 2;</code>
+     */
+    protected $queueName = '';
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class TopicSubscribeRequest extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $topic
+     *     @type string $queueName
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class TopicSubscribeRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->topic = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>string queueName = 2;</code>
+     * @return string
+     */
+    public function getQueueName()
+    {
+        return $this->queueName;
+    }
+
+    /**
+     * Generated from protobuf field <code>string queueName = 2;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setQueueName($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->queueName = $var;
 
         return $this;
     }

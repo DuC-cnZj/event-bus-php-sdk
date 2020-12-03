@@ -100,15 +100,16 @@ class MqTopicClientService
     }
     /**
      * @param string $topic
+     * @param string $queueName
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \DucCnzj\EventBus\Mq\SubscribeResponse|array
      */
-    public function subscribe($topic = '', $asArray = true, $metadata = [], $options = [])
+    public function subscribe($topic = '', $queueName = '', $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["topic" => $topic];
+        $input = ["topic" => $topic, "queueName" => $queueName];
         $request = $input;
         if (is_array($input)) {
             $request = new TopicSubscribeRequest();
