@@ -24,15 +24,16 @@ class MqClientService
     /**
      * @param string $queue
      * @param string $data
+     * @param int|string $expiration
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function publish($queue = '', $data = '', $asArray = true, $metadata = [], $options = [])
+    public function publish($queue = '', $data = '', $expiration = 0, $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["queue" => $queue, "data" => $data];
+        $input = ["queue" => $queue, "data" => $data, "expiration" => $expiration];
         $request = $input;
         if (is_array($input)) {
             $request = new PublishRequest();
@@ -63,15 +64,16 @@ class MqClientService
      * @param string $queue
      * @param string $data
      * @param int|string $delaySeconds
+     * @param int|string $expiration
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function delayPublish($queue = '', $data = '', $delaySeconds = 0, $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($queue = '', $data = '', $delaySeconds = 0, $expiration = 0, $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["queue" => $queue, "data" => $data, "delaySeconds" => $delaySeconds];
+        $input = ["queue" => $queue, "data" => $data, "delaySeconds" => $delaySeconds, "expiration" => $expiration];
         $request = $input;
         if (is_array($input)) {
             $request = new DelayPublishRequest();

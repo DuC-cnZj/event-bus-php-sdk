@@ -21,6 +21,10 @@ class TopicPublishRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string data = 2;</code>
      */
     protected $data = '';
+    /**
+     * Generated from protobuf field <code>uint64 Expiration = 3;</code>
+     */
+    protected $Expiration = 0;
 
     /**
      * Constructor.
@@ -30,6 +34,7 @@ class TopicPublishRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $topic
      *     @type string $data
+     *     @type int|string $Expiration
      * }
      */
     public function __construct($data = NULL) {
@@ -77,6 +82,28 @@ class TopicPublishRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->data = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint64 Expiration = 3;</code>
+     * @return int|string
+     */
+    public function getExpiration()
+    {
+        return $this->Expiration;
+    }
+
+    /**
+     * Generated from protobuf field <code>uint64 Expiration = 3;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setExpiration($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->Expiration = $var;
 
         return $this;
     }

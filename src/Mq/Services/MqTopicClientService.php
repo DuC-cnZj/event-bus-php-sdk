@@ -24,15 +24,16 @@ class MqTopicClientService
     /**
      * @param string $topic
      * @param string $data
+     * @param int|string $expiration
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function publish($topic = '', $data = '', $asArray = true, $metadata = [], $options = [])
+    public function publish($topic = '', $data = '', $expiration = 0, $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["topic" => $topic, "data" => $data];
+        $input = ["topic" => $topic, "data" => $data, "expiration" => $expiration];
         $request = $input;
         if (is_array($input)) {
             $request = new TopicPublishRequest();
@@ -63,15 +64,16 @@ class MqTopicClientService
      * @param string $topic
      * @param string $data
      * @param int|string $delaySeconds
+     * @param int|string $expiration
      * @param bool $asArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function delayPublish($topic = '', $data = '', $delaySeconds = 0, $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($topic = '', $data = '', $delaySeconds = 0, $expiration = 0, $asArray = true, $metadata = [], $options = [])
     {
-        $input = ["topic" => $topic, "data" => $data, "delaySeconds" => $delaySeconds];
+        $input = ["topic" => $topic, "data" => $data, "delaySeconds" => $delaySeconds, "expiration" => $expiration];
         $request = $input;
         if (is_array($input)) {
             $request = new DelayTopicPublishRequest();
