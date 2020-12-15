@@ -26,9 +26,9 @@ class DelayTopicPublishRequest extends \Google\Protobuf\Internal\Message
      */
     protected $delaySeconds = 0;
     /**
-     * Generated from protobuf field <code>uint64 Expiration = 4;</code>
+     * Generated from protobuf field <code>uint64 ExpirationSeconds = 4;</code>
      */
-    protected $Expiration = 0;
+    protected $ExpirationSeconds = 0;
 
     /**
      * Constructor.
@@ -39,7 +39,7 @@ class DelayTopicPublishRequest extends \Google\Protobuf\Internal\Message
      *     @type string $topic
      *     @type string $data
      *     @type int|string $delaySeconds
-     *     @type int|string $Expiration
+     *     @type int|string $ExpirationSeconds
      * }
      */
     public function __construct($data = NULL) {
@@ -114,23 +114,23 @@ class DelayTopicPublishRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 Expiration = 4;</code>
+     * Generated from protobuf field <code>uint64 ExpirationSeconds = 4;</code>
      * @return int|string
      */
-    public function getExpiration()
+    public function getExpirationSeconds()
     {
-        return $this->Expiration;
+        return $this->ExpirationSeconds;
     }
 
     /**
-     * Generated from protobuf field <code>uint64 Expiration = 4;</code>
+     * Generated from protobuf field <code>uint64 ExpirationSeconds = 4;</code>
      * @param int|string $var
      * @return $this
      */
-    public function setExpiration($var)
+    public function setExpirationSeconds($var)
     {
         GPBUtil::checkUint64($var);
-        $this->Expiration = $var;
+        $this->ExpirationSeconds = $var;
 
         return $this;
     }
