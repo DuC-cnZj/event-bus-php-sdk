@@ -25,13 +25,13 @@ class MqTopicClientService
      * @param string $topic
      * @param string $data
      * @param int|string $expirationSeconds
-     * @param bool $asArray
+     * @param bool $toArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function publish($topic = '', $data = '', $expirationSeconds = 0, $asArray = true, $metadata = [], $options = [])
+    public function publish($topic = '', $data = '', $expirationSeconds = 0, $toArray = false, $metadata = [], $options = [])
     {
         $input = ["topic" => $topic, "data" => $data, "expirationSeconds" => $expirationSeconds];
         $request = $input;
@@ -51,7 +51,7 @@ class MqTopicClientService
         $metadata["UID"] = [(string)auth()->id()];
         [$data, $response] = $this->client->publish($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
-            if ($asArray) {
+            if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
             }
 
@@ -65,13 +65,13 @@ class MqTopicClientService
      * @param string $data
      * @param int|string $delaySeconds
      * @param int|string $expirationSeconds
-     * @param bool $asArray
+     * @param bool $toArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function delayPublish($topic = '', $data = '', $delaySeconds = 0, $expirationSeconds = 0, $asArray = true, $metadata = [], $options = [])
+    public function delayPublish($topic = '', $data = '', $delaySeconds = 0, $expirationSeconds = 0, $toArray = false, $metadata = [], $options = [])
     {
         $input = ["topic" => $topic, "data" => $data, "delaySeconds" => $delaySeconds, "expirationSeconds" => $expirationSeconds];
         $request = $input;
@@ -91,7 +91,7 @@ class MqTopicClientService
         $metadata["UID"] = [(string)auth()->id()];
         [$data, $response] = $this->client->delayPublish($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
-            if ($asArray) {
+            if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
             }
 
@@ -103,13 +103,13 @@ class MqTopicClientService
     /**
      * @param string $topic
      * @param string $queueName
-     * @param bool $asArray
+     * @param bool $toArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \DucCnzj\EventBus\Mq\SubscribeResponse|array
      */
-    public function subscribe($topic = '', $queueName = '', $asArray = true, $metadata = [], $options = [])
+    public function subscribe($topic = '', $queueName = '', $toArray = false, $metadata = [], $options = [])
     {
         $input = ["topic" => $topic, "queueName" => $queueName];
         $request = $input;
@@ -129,7 +129,7 @@ class MqTopicClientService
         $metadata["UID"] = [(string)auth()->id()];
         [$data, $response] = $this->client->subscribe($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
-            if ($asArray) {
+            if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
             }
 
@@ -140,13 +140,13 @@ class MqTopicClientService
     }
     /**
      * @param string $id
-     * @param bool $asArray
+     * @param bool $toArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function ack($id = '', $asArray = true, $metadata = [], $options = [])
+    public function ack($id = '', $toArray = false, $metadata = [], $options = [])
     {
         $input = ["id" => $id];
         $request = $input;
@@ -166,7 +166,7 @@ class MqTopicClientService
         $metadata["UID"] = [(string)auth()->id()];
         [$data, $response] = $this->client->ack($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
-            if ($asArray) {
+            if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
             }
 
@@ -177,13 +177,13 @@ class MqTopicClientService
     }
     /**
      * @param string $id
-     * @param bool $asArray
+     * @param bool $toArray
      * @param array $metadata metadata
      * @param array $options call options
      *
      * @return \Google\Protobuf\GPBEmpty|array
      */
-    public function nack($id = '', $asArray = true, $metadata = [], $options = [])
+    public function nack($id = '', $toArray = false, $metadata = [], $options = [])
     {
         $input = ["id" => $id];
         $request = $input;
@@ -203,7 +203,7 @@ class MqTopicClientService
         $metadata["UID"] = [(string)auth()->id()];
         [$data, $response] = $this->client->nack($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
-            if ($asArray) {
+            if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
             }
 
