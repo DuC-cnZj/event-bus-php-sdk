@@ -3,7 +3,9 @@
 namespace DucCnzj\EventBus\Mq;
 
 use DucCnzj\EventBus\Mq\MqClient;
+use DucCnzj\EventBus\Mq\Services\MqClientService;
 use DucCnzj\EventBus\Mq\MqTopicClient;
+use DucCnzj\EventBus\Mq\Services\MqTopicClientService;
 
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -19,6 +21,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             ->give([
                 'credentials' => \Grpc\ChannelCredentials::createInsecure(),
             ]);
+        $this->app->when(MqClientService::class)
+            ->needs('$uidResolver')
+            ->give(function () {
+                return function () {
+                    return auth()->id();
+                };
+            });
         $this->app->singleton(MqTopicClient::class);
         $this->app->when(MqTopicClient::class)
             ->needs('$hostname')
@@ -28,5 +37,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             ->give([
                 'credentials' => \Grpc\ChannelCredentials::createInsecure(),
             ]);
+        $this->app->when(MqTopicClientService::class)
+            ->needs('$uidResolver')
+            ->give(function () {
+                return function () {
+                    return auth()->id();
+                };
+            });
     }
 }

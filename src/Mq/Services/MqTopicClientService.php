@@ -16,9 +16,12 @@ class MqTopicClientService
      */
     protected $client;
 
-    public function __construct(MqTopicClient $client)
+    protected $uidResolver;
+
+    public function __construct(MqTopicClient $client, callable $uidResolver = null)
     {
         $this->client = $client;
+        $this->uidResolver = $uidResolver ?? function () {return "";};
     }
 
     /**
@@ -48,7 +51,7 @@ class MqTopicClientService
         if (isset($_SERVER['UBER-TRACE-ID'])) {
             $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
         }
-        $metadata["UID"] = [(string)auth()->id()];
+        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
         [$data, $response] = $this->client->publish($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
@@ -88,7 +91,7 @@ class MqTopicClientService
         if (isset($_SERVER['UBER-TRACE-ID'])) {
             $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
         }
-        $metadata["UID"] = [(string)auth()->id()];
+        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
         [$data, $response] = $this->client->delayPublish($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
@@ -126,7 +129,7 @@ class MqTopicClientService
         if (isset($_SERVER['UBER-TRACE-ID'])) {
             $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
         }
-        $metadata["UID"] = [(string)auth()->id()];
+        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
         [$data, $response] = $this->client->subscribe($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
@@ -163,7 +166,7 @@ class MqTopicClientService
         if (isset($_SERVER['UBER-TRACE-ID'])) {
             $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
         }
-        $metadata["UID"] = [(string)auth()->id()];
+        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
         [$data, $response] = $this->client->ack($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
@@ -200,7 +203,7 @@ class MqTopicClientService
         if (isset($_SERVER['UBER-TRACE-ID'])) {
             $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
         }
-        $metadata["UID"] = [(string)auth()->id()];
+        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
         [$data, $response] = $this->client->nack($request, $metadata, $options)->wait();
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
