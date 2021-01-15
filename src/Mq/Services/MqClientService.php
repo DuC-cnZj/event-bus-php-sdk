@@ -16,12 +16,15 @@ class MqClientService
      */
     protected $client;
 
-    protected $uidResolver;
+    /**
+     * @var \Closure[]
+     */
+    protected $middlewares;
 
-    public function __construct(MqClient $client, callable $uidResolver = null)
+    public function __construct(MqClient $client, array $middlewares = [])
     {
         $this->client = $client;
-        $this->uidResolver = $uidResolver ?? function () {return "";};
+        $this->middlewares = $middlewares;
     }
 
     /**
@@ -47,12 +50,19 @@ class MqClientService
                 }
             }
         }
-        // TODO 不写死
-        if (isset($_SERVER['UBER-TRACE-ID'])) {
-            $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
-        }
-        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
-        [$data, $response] = $this->client->publish($request, $metadata, $options)->wait();
+
+        $result = array_reduce(
+            array_reverse($this->middlewares),
+            function ($start, $handler) {
+                return function ($metadata) use ($start, $handler) {
+                    return $handler($metadata, $start);
+                };
+            }, function ($metadata) use ($request, $options) {
+               return $this->client->publish($request, $metadata, $options)->wait();
+            }
+        );
+        [$data, $response] = $result($metadata);
+
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
@@ -87,12 +97,19 @@ class MqClientService
                 }
             }
         }
-        // TODO 不写死
-        if (isset($_SERVER['UBER-TRACE-ID'])) {
-            $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
-        }
-        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
-        [$data, $response] = $this->client->delayPublish($request, $metadata, $options)->wait();
+
+        $result = array_reduce(
+            array_reverse($this->middlewares),
+            function ($start, $handler) {
+                return function ($metadata) use ($start, $handler) {
+                    return $handler($metadata, $start);
+                };
+            }, function ($metadata) use ($request, $options) {
+               return $this->client->delayPublish($request, $metadata, $options)->wait();
+            }
+        );
+        [$data, $response] = $result($metadata);
+
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
@@ -124,12 +141,19 @@ class MqClientService
                 }
             }
         }
-        // TODO 不写死
-        if (isset($_SERVER['UBER-TRACE-ID'])) {
-            $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
-        }
-        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
-        [$data, $response] = $this->client->subscribe($request, $metadata, $options)->wait();
+
+        $result = array_reduce(
+            array_reverse($this->middlewares),
+            function ($start, $handler) {
+                return function ($metadata) use ($start, $handler) {
+                    return $handler($metadata, $start);
+                };
+            }, function ($metadata) use ($request, $options) {
+               return $this->client->subscribe($request, $metadata, $options)->wait();
+            }
+        );
+        [$data, $response] = $result($metadata);
+
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
@@ -161,12 +185,19 @@ class MqClientService
                 }
             }
         }
-        // TODO 不写死
-        if (isset($_SERVER['UBER-TRACE-ID'])) {
-            $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
-        }
-        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
-        [$data, $response] = $this->client->ack($request, $metadata, $options)->wait();
+
+        $result = array_reduce(
+            array_reverse($this->middlewares),
+            function ($start, $handler) {
+                return function ($metadata) use ($start, $handler) {
+                    return $handler($metadata, $start);
+                };
+            }, function ($metadata) use ($request, $options) {
+               return $this->client->ack($request, $metadata, $options)->wait();
+            }
+        );
+        [$data, $response] = $result($metadata);
+
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
@@ -198,12 +229,19 @@ class MqClientService
                 }
             }
         }
-        // TODO 不写死
-        if (isset($_SERVER['UBER-TRACE-ID'])) {
-            $metadata['UBER-TRACE-ID'] = [$_SERVER['UBER-TRACE-ID']];
-        }
-        $metadata["UID"] = [(string)call_user_func($this->uidResolver)];
-        [$data, $response] = $this->client->nack($request, $metadata, $options)->wait();
+
+        $result = array_reduce(
+            array_reverse($this->middlewares),
+            function ($start, $handler) {
+                return function ($metadata) use ($start, $handler) {
+                    return $handler($metadata, $start);
+                };
+            }, function ($metadata) use ($request, $options) {
+               return $this->client->nack($request, $metadata, $options)->wait();
+            }
+        );
+        [$data, $response] = $result($metadata);
+
         if ($response->code == \Grpc\CALL_OK) {
             if ($toArray) {
                 return json_decode($data->serializeToJsonString(), true);
